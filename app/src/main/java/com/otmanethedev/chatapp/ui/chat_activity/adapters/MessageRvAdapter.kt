@@ -1,4 +1,4 @@
-package com.otmanethedev.chatapp.ui.adapters
+package com.otmanethedev.chatapp.ui.chat_activity.adapters
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -6,18 +6,18 @@ import androidx.recyclerview.widget.RecyclerView
 import com.otmanethedev.chatapp.databinding.ItemDateSectionBinding
 import com.otmanethedev.chatapp.databinding.ItemInputMessageBinding
 import com.otmanethedev.chatapp.databinding.ItemOutputMessageBinding
-import android.icu.util.Calendar
 import com.otmanethedev.chatapp.R
-import com.otmanethedev.chatapp.ui.models.Message
+import com.otmanethedev.chatapp.domain.models.Message
+import com.otmanethedev.chatapp.ui.chat_activity.models.UiMessage
 import com.otmanethedev.chatapp.utils.dayAndHour
 import com.otmanethedev.chatapp.utils.isToday
 import com.otmanethedev.chatapp.utils.viewBinding
 
 class MessageRvAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private var items: List<Message> = emptyList()
+    private var items: List<UiMessage> = emptyList()
 
-    fun updateList(items: List<Message>) {
+    fun updateList(items: List<UiMessage>) {
         val diffCallback = MessageDiffCallback(this.items, items)
         val diffResult = DiffUtil.calculateDiff(diffCallback)
         diffResult.dispatchUpdatesTo(this)
@@ -36,9 +36,9 @@ class MessageRvAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (val item = items[position]) {
-            is Message.DateSection -> (holder as DateSectionViewHolder).bind(item)
-            is Message.InputMessage -> (holder as InputMessageViewHolder).bind(item)
-            is Message.OutputMessage -> (holder as OutputMessageViewHolder).bind(item)
+            is UiMessage.DateSection -> (holder as DateSectionViewHolder).bind(item)
+            is UiMessage.InputUiMessage -> (holder as InputMessageViewHolder).bind(item)
+            is UiMessage.OutputUiMessage -> (holder as OutputMessageViewHolder).bind(item)
         }
     }
 
@@ -46,14 +46,14 @@ class MessageRvAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun getItemViewType(position: Int): Int {
         return when (items[position]) {
-            is Message.DateSection -> R.layout.item_date_section
-            is Message.InputMessage -> R.layout.item_input_message
-            is Message.OutputMessage -> R.layout.item_output_message
+            is UiMessage.DateSection -> R.layout.item_date_section
+            is UiMessage.InputUiMessage -> R.layout.item_input_message
+            is UiMessage.OutputUiMessage -> R.layout.item_output_message
         }
     }
 
     inner class DateSectionViewHolder(private val binding: ItemDateSectionBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: Message.DateSection) {
+        fun bind(item: UiMessage.DateSection) {
             if (item.date.isToday()) {
                 binding.txtDate.text = "Today"
             } else {
@@ -63,18 +63,18 @@ class MessageRvAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     inner class InputMessageViewHolder(private val binding: ItemInputMessageBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: Message.InputMessage) {
+        fun bind(item: UiMessage.InputUiMessage) {
             binding.txtMessage.text = item.text
         }
     }
 
     inner class OutputMessageViewHolder(private val binding: ItemOutputMessageBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: Message.OutputMessage) {
+        fun bind(item: UiMessage.OutputUiMessage) {
             binding.txtMessage.text = item.text
         }
     }
 
-    class MessageDiffCallback(private val oldList: List<Message>, private val newList: List<Message>) : DiffUtil.Callback() {
+    class MessageDiffCallback(private val oldList: List<UiMessage>, private val newList: List<UiMessage>) : DiffUtil.Callback() {
 
         override fun getOldListSize(): Int = oldList.size
 
