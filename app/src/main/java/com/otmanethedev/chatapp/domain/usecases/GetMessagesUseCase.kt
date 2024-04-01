@@ -3,8 +3,8 @@ package com.otmanethedev.chatapp.domain.usecases
 import com.otmanethedev.chatapp.data.Constants
 import com.otmanethedev.chatapp.domain.repository.MessagesRepository
 import com.otmanethedev.chatapp.ui.chat_activity.models.UiMessage
-import com.otmanethedev.chatapp.utils.toCalendar
-import com.otmanethedev.chatapp.utils.toLong
+import com.otmanethedev.chatapp.domain.utils.toCalendar
+import com.otmanethedev.chatapp.domain.utils.toLong
 import javax.inject.Inject
 import javax.inject.Singleton
 import kotlinx.coroutines.Dispatchers

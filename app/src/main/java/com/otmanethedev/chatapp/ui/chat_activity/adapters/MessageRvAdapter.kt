@@ -3,15 +3,14 @@ package com.otmanethedev.chatapp.ui.chat_activity.adapters
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.otmanethedev.chatapp.R
 import com.otmanethedev.chatapp.databinding.ItemDateSectionBinding
 import com.otmanethedev.chatapp.databinding.ItemInputMessageBinding
 import com.otmanethedev.chatapp.databinding.ItemOutputMessageBinding
-import com.otmanethedev.chatapp.R
-import com.otmanethedev.chatapp.domain.models.Message
 import com.otmanethedev.chatapp.ui.chat_activity.models.UiMessage
-import com.otmanethedev.chatapp.utils.dayAndHour
-import com.otmanethedev.chatapp.utils.isToday
-import com.otmanethedev.chatapp.utils.viewBinding
+import com.otmanethedev.chatapp.ui.utils.dayAndHour
+import com.otmanethedev.chatapp.ui.utils.isToday
+import com.otmanethedev.chatapp.ui.utils.viewBinding
 
 class MessageRvAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 

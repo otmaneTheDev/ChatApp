@@ -1,4 +1,4 @@
-package com.otmanethedev.chatapp.utils
+package com.otmanethedev.chatapp.ui.utils
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
