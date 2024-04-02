@@ -19,7 +19,7 @@ class DatabaseModule {
     fun provideMessagesDatabase(@ApplicationContext context: Context): MessagesDatabase {
         return Room
             .databaseBuilder(context, MessagesDatabase::class.java, "messages_db")
-            .createFromAsset("database/messages_db")
+            .createFromAsset("database/messages")
             .build()
     }
 

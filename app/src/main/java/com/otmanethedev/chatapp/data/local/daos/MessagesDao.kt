@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface MessagesDao {
 
-    @Query("SELECT * FROM messages")
+    @Query("SELECT * FROM messages ORDER BY date ASC ")
     fun getMessages(): Flow<List<MessageEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

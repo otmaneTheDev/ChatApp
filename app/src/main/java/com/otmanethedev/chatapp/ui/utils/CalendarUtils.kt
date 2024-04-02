@@ -1,7 +1,7 @@
 package com.otmanethedev.chatapp.ui.utils
 
-import java.text.SimpleDateFormat
 import android.icu.util.Calendar
+import java.text.SimpleDateFormat
 import java.util.Locale
 
 fun Calendar.dayAndHour() = SimpleDateFormat("EEEE HH:mm", Locale.getDefault()).format(this.time)

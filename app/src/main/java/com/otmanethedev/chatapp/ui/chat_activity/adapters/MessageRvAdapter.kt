@@ -1,6 +1,8 @@
 package com.otmanethedev.chatapp.ui.chat_activity.adapters
 
+import android.content.res.ColorStateList
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.otmanethedev.chatapp.R
@@ -54,7 +56,7 @@ class MessageRvAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     inner class DateSectionViewHolder(private val binding: ItemDateSectionBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: UiMessage.DateSection) {
             if (item.date.isToday()) {
-                binding.txtDate.text = "Today"
+                binding.txtDate.setText(R.string.lbl_today)
             } else {
                 binding.txtDate.text = item.date.dayAndHour()
             }
@@ -62,14 +64,26 @@ class MessageRvAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     inner class InputMessageViewHolder(private val binding: ItemInputMessageBinding) : RecyclerView.ViewHolder(binding.root) {
+        private val context by lazy { binding.root.context }
+
         fun bind(item: UiMessage.InputUiMessage) {
             binding.txtMessage.text = item.text
+
+            val backgroundShape = if (item.hasTail) R.drawable.shape_input_message else R.drawable.shape_bubble_message
+            binding.txtMessage.setBackgroundDrawable(ContextCompat.getDrawable(context, backgroundShape))
+            binding.txtMessage.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(context, R.color.aliceBlue))
         }
     }
 
     inner class OutputMessageViewHolder(private val binding: ItemOutputMessageBinding) : RecyclerView.ViewHolder(binding.root) {
+        private val context by lazy { binding.root.context }
+
         fun bind(item: UiMessage.OutputUiMessage) {
             binding.txtMessage.text = item.text
+
+            val backgroundShape = if (item.hasTail) R.drawable.shape_output_message else R.drawable.shape_bubble_message
+            binding.txtMessage.setBackgroundDrawable(ContextCompat.getDrawable(context, backgroundShape))
+            binding.txtMessage.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(context, R.color.folly))
         }
     }
 
