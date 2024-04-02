@@ -44,6 +44,4 @@ class GetMessagesUseCase @Inject constructor(
             }
             messagesDomain
         }.flowOn(Dispatchers.IO)
-
-
 }
